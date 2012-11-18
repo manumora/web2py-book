@@ -4,51 +4,51 @@
 
 ``Linux``:inxx ``Mac``:inxx ``Windows``:inxx
 
-web2py comes in binary packages for Windows and Mac OS X. They include the Python interpreter so you do not need to have it pre-installed. There is also a source code version that runs on Windows, Mac, Linux, and other Unix systems. The Windows and OS X binary versions include the necessary Python interpreter. The source code package assumes that Python is already installed on the computer.
+Web2py viene en paquetes binarios para Windows y Mac OS X. Estos incluyen el intérprete de Python, así que no es necesario tener que pre-instalado. También hay una versión de código fuente que se ejecuta en Windows, Mac, Linux y otros sistemas Unix. Las versiones Windows y OS X binarias incluyen el necesario intérprete de Python. El paquete del código fuente de Python asume que este ya está instalado en el equipo.
 
-web2py requires no installation. To get started, unzip the downloaded zip file for your specific operating system and execute the corresponding ``web2py`` file.
+Web2py no requiere instalación. Para empezar, descomprimir el archivo zip descargado para su sistema operativo y ejecutar el archivo ``web2py`` correspondiente.
 
-On Windows, run:
+En Windows, ejecuta:
 ``
 web2py.exe
 ``:code
 
-On OS X, run:
+En OS X, ejecuta:
 ``
 open web2py.app
 ``:code
 
-On Unix and Linux, run from source by typing:
+En Unix y Linux, ejecuta desde el fuente escribiendo:
 ``
 python2.5 web2py.py
 ``:code
 
-To run web2py on Windows from source install first  [[Mark Hammond's "Python for Windows extensions http://sourceforge.net/projects/pywin32/]], then run:
+Para ejecutar web2py sobre Windows desde el fuente instala primero  [[Mark Hammond's "Python for Windows extensions http://sourceforge.net/projects/pywin32/]], entonces ejecuta:
 ``
 python2.5 web2py.py
 ``:code
 
 
-The web2py program accepts various command line options which are discussed later.
+El programa web2py acepta varias opciones de línea de comandos que se describen más adelante.
 
-By default, at startup, web2py displays a startup window and then displays a GUI widget that asks you to choose a one-time administrator password, the IP address of the network interface to be used for the web server, and a port number from which to serve requests. By default, web2py runs its web server on 127.0.0.1:8000 (port 8000 on localhost), but you can run it on any available IP address and port. You can query the IP address of your network interface by opening a command line and typing ``ipconfig`` on Windows or ``ifconfig`` on OS X and Linux. From now on we assume web2py is running on localhost (127.0.0.1:8000). Use 0.0.0.0:80 to run web2py publicly on any of your network interfaces.
+Por defecto, en el inicio, web2py muestra una ventana de inicio y luego muestra una aplicación GUI que te pide elejir una contraseña de administrador una sola vez, la dirección IP de la interfaz de red que se utilizará para el servidor web y un número de puerto desde donde servir peticiones. Por defecto, web2py ejecuta su servidor web en 127.0.0.1:8000 (el puerto 8000 en localhost), pero se puede ejecutar en cualquier dirección IP y puerto disponible. Se puede consultar la dirección IP de tu interfaz de red mediante la apertura de una línea de comandos y escribir ``ipconfig`` en Windows o ``ifconfig`` en OS X y Linux. A partir de ahora suponemos que web2py se está ejecutando en localhost (127.0.0.1:8000). Se usa 0.0.0.0:80 para ejecutar web2py públicamente en cualquiera de las interfaces de red. 
 
 [[image @///image/en400.png center 306px]]
 
-If you do not provide an administrator password, the administration interface is disabled. This is a security measure to prevent publicly exposing the admin interface.
+Si no proporcionas una contraseña de administrador, la interfaz de administración está deshabilitada. Esta es una medida de seguridad para evitar exponer públicamente la interfaz admin.
 
-The administrative interface, **admin**, is only accessible from localhost unless you run web2py behind Apache with mod_proxy. If **admin** detects a proxy, the session cookie is set to secure and **admin** login does not work unless the communication between the client and the proxy goes over HTTPS; this is a security measure. All communications between the client and **admin** must always be local or encrypted; otherwise an attacker would be able to perform a man-in-the middle attack or a replay attack and execute arbitrary code on the server.
+La interfaz administrativa, **admin**, sólo es accesible desde localhost a menos que ejecutes web2py soportando Apache con mod_proxy. Si **admin** detecta un proxy, la cookie de sesión se establece para bloquear y la entrada al sistema de **admin** no funciona a menos que la comunicación entre el cliente y el proxy vaya a través de HTTPS, esto es una medida de seguridad. Todas las comunicaciones entre el cliente y **admin** siempre debe ser local o encriptadas, de lo contrario un atacante podría ser capaz de realizar un ataque de hombre-en-el-medio o un ataque de réplica y ejecutar código arbitrario en el servidor.
 
-After the administration password has been set, web2py starts up the web browser at the page:
+Después de la contraseña de administración se ha fijado, web2py pone en marcha el navegador de Internet en la página:
 ``
 http://127.0.0.1:8000/
 ``:code
 
-If the computer does not have a default browser, open a web browser and enter the URL.
+Si el equipo no tiene un navegador por defecto, abra un navegador web e introduzca la dirección URL.
 
 [[image @///image/en500.png center 480px]]
 
-Clicking on "administrative interface" takes you to the login page for the administration interface.
+Haciendo click en "administrative interface" lleva a la página de entrada al sistema para la interface de administración.
 
 [[image @///image/en600.png center 480px]]
 
