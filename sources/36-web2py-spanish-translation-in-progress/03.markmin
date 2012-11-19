@@ -52,22 +52,22 @@ Haciendo click en "administrative interface" lleva a la página de entrada al si
 
 [[image @///image/en600.png center 480px]]
 
-The administrator password is the password you chose at startup.
-Notice that there is only one administrator, and therefore only one administrator password. For security reasons, the developer is asked to choose a new password every time web2py starts unless the <recycle> option is specified. This is distinct from the authentication mechanism in web2py applications.
+La contraseña de administrador es la contraseña que elegistes en el inicio.
+Observe que hay un único administrador, y por lo tanto una única contraseña de administrador. Por razones de seguridad, el desarrollador es preguntado para elegir una nueva contraseña cada vez que web2py se inicia a menos que se especifique la opción <recicle>. Esto es diferente al mecanismo de autenticación en las aplicaciones de web2py.
 
-After the administrator logs into web2py, the browser is redirected to the "site" page.
+Después que el adminsitrador se loguea en web2py, el navegador es redirigido a la página "site".
 
 [[image @///image/en700.png center 480px]]
 
-This page lists all installed web2py applications and allows the administrator to manage them.
-web2py comes with three applications:
+Esta página lista todas las aplicaciones de web2py instaladas y habilita al administrador para su gestión.
+Web2py viene con tres aplicaciones:
 ``admin``:inxx ``examples``:inxx ``welcome``:inxx ``scaffolding``:inxx
-- An **admin** application, the one you are using right now.
-- An **examples** application, with the online interactive documentation and a replica of the web2py official website.
-- A **welcome** application. This is the basic template for any other web2py application. It is referred to as the scaffolding application. This is also the application that welcomes a user at startup.
+- La aplicación **admin**, la que usas en este momento.
+- La aplicación **examples**, con la documentación interactiva online y una replica de la página oficial de web2py.
+- La aplicación **welcome**. Esta es la plantilla básica para cualquier otra aplicación de web2py. Se conoce como la aplicación de andamiaje. Esta también es la aplicación que da la bienvenida al usuario al inicio.
 
 ``appliances``:inxx
-Ready-to-use web2py applications are referred to as web2py ''appliances''.  You can download many freely available appliances from ``appliances``:cite . web2py users are encouraged to submit new appliances, either in open-source or closed-source (compiled and packed) form.
+Las aplicaciones de web2py listas-para-usar se conocen como ''aplicaciones'' web2py. Puedes descargar muchas de ellas disponibles gratuitamente desde ``appliances``:cite . A los usuarios de web2py se les anima a entregar nuevas aplicaciones, tanto en código abierto como en código cerrado (compilado y empaquetado).
 
 From the **admin** application's ''site'' page, you can perform the following operations:
 - **install** an application by completing the form on the bottom right of the page. Give a name to the application, select the file containing a packaged application or the URL where the application is located, and click "submit".
