@@ -69,57 +69,58 @@ Web2py viene con tres aplicaciones:
 ``appliances``:inxx
 Las aplicaciones de web2py listas-para-usar se conocen como ''aplicaciones'' web2py. Puedes descargar muchas de ellas disponibles gratuitamente desde ``appliances``:cite . A los usuarios de web2py se les anima a entregar nuevas aplicaciones, tanto en código abierto como en código cerrado (compilado y empaquetado).
 
-From the **admin** application's ''site'' page, you can perform the following operations:
-- **install** an application by completing the form on the bottom right of the page. Give a name to the application, select the file containing a packaged application or the URL where the application is located, and click "submit".
-- **uninstall** an application by clicking the corresponding button. There is a confirmation page.
-- **create** a new application by choosing a name and clicking "create".
-- **package** an application for distribution by clicking on the corresponding button. A downloaded application is a tar file containing everything, including the database. You should not untar this file; it is automatically unpackaged by web2py when installed with **admin**.
-- **clean up** an application's temporary files, such as sessions, errors and cache files.
-- **EDIT** an application.
+Desde la página de la aplicación **admin**, puedes realizar las siguientes operaciones:
+- **Instalar** una aplicación completando el formulario en la parte inferior derecha de la página. Asigna un nombre a la aplicación, selecciona el archivo que contiene una aplicación empaquetada o la URL donde se encuentra la aplicación, y haz clic en "enviar".
+- **Desinstalar** una aplicación haciendo clic en el botón correspondiente. Hay una página de confirmación.
+- **Crear** una nueva aplicación eligiendo un nombre y haciendo clic en "enviar".
+- **Empaquetar** una aplicación para su distribución haciendo clic en el botón correspondiente. Una aplicación de descarga es un archivo tar que contiene todo, incluyendo la base de datos. No debes descomprimir este archivo; web2py lo hace automáticamente cuando se instalan con **admin**.
+- **Limpieza** de archivos temporales de una aplicación tales como sesiones, errores y los archivos caché.
+- **Editar** una aplicación.
 
 -----
-When you create a new application using **admin**, it starts as a clone of the "welcome" scaffolding app with a "models/db.py" that creates a SQLite database, connects to it, instantiates Auth, Crud and Service, configures them. It also provides a "controller/default.py" which exposes actions "index", "download", "user" for user management, and "call" for services. In the following, we assume that these files have been removed; we will be creating apps from scratch.
+Al crear una nueva solicitud usando **admin**, esta comienza como un clon de la aplicación de andamio "welcome" con un "model/db.py" que crea una base de datos SQLite, se conecta a ella, crea instancias de Auth, Crud y Servicio, y los configura. También proporciona un "controller/ default.py", que expone las acciones "índice" (index), "descargar" (download), "usuario" (user) para la gestión de usuarios, y "llamada" (call) para los servicios. A continuación, se supone que estos archivos se han eliminado, vamos a estar creando aplicaciones desde cero.
 -----
 
 -----
-web2py also comes with a **wizard**, described later in this chapter, that can write an alternate scaffolding code for you based on layouts and plugins available on the web and based on high level description of the models.
+Web2py viene también con un **asistente**, que se describe más adelante en este capítulo, que puede escribir un código de andamiaje alternativo para ti basado en diseños y plugins disponibles en la web y basado en la descripción de alto nivel de los modelos.
 -----
 
-### Say hello
+### Diga Hello
 ``index``:inxx
 
-Here, as an example, we create a simple web app that displays the message "Hello from MyApp" to the user. We will call this application "myapp". We will also add a counter that counts how many times the same user visits the page.
+Aquí, como ejemplo, se crea una sencilla aplicación web que muestra el mensaje "Hello from MyApp" al usuario. Vamos a llamar a esta aplicación "myapl". También vamos a agregar un contador que cuenta las veces que el usuario visita la página.
 
-You can create a new application simply by typing its name in the form on the top right of the **site** page in **admin**.
+Se puede crear una nueva aplicación con sólo escribir su nombre en la forma de la parte superior derecha de la página web de **admin**.
 
 [[image @///image/en800.png center 447px]]
 
-After you press [create], the application is created as a copy of the built-in welcome application.
+Después de presionar enviar [submit], la aplicación es creada como una copia de la applicación incorporada welcome.
 
 [[image @///image/en900.png center 480px]]
 
-To run the new application, visit:
+Para ejecutar la aplicación nueva se debe visitar:
 ``
 http://127.0.0.1:8000/myapp
 ``:code
 
-Now you have a copy of the welcome application.
+Ahora tienes una copia de la aplicación welcome.
 
-To edit an application, click on the ''edit'' button for the newly created application.
+Para editar una aplicación, haz clic en el botón ''edit'' de la aplicación creada recientemente.
 
-The **edit** page tells you what is inside the application.
-Every web2py application consists of certain files, most of which fall into one of isx categories:
-- **models**: describe the data representation.
-- **controllers**: describe the application logic and workflow.
-- **views**: describe the data presentation.
-- **languages**: describe how to translate the application presentation to other languages.
-- **modules**: Python modules that belong to the application.
-- **static files**: static images, CSS  files``css:w,css:o,css:school``:cite , JavaScript files``js:w,js:b``:cite , etc.
-- **plugins**: groups of files designed to work together.
+La página **edit** dice que está dentro de la aplicación.
+Cada aplicación web2py consta de ciertos archivos, la mayoría de los cuales pertenecen a una de estas categorías:
+- Modelos **models**: describen la representación de datos.
+- Controladores **controllers**: describen la lógica de la aplicación y flujo de trabajo.
+- Vistas **views**: describen la presentación de datos.
+- Idiomas **languages**: describen la manera de trasladar la presentación de solicitud a otros idiomas.
+- Módulos **modules**: módulos de Python que pertenecen a la aplicación.
+- Archivos Estáticos **static files**: imágenes estáticas, archivos CSS``css:w,css:o,css:school``:cite, archivos JavaScript``js:w,js:b``:cite, etc.
+- **Plugins**: 
+- **plugins**: grupos de archivos diseñados para trabajar juntos.
  
-Everything is neatly organized following the Model-View-Controller design pattern. Each section in the ''edit'' page corresponds to a subfolder in the application folder.
+Todo está cuidadosamente organizado basado en el patrón de diseño Modelo-Vista-Controlador. Cada sección en la página ''edit'' corresponde a una subcarpeta en la carpeta de la aplicación.
 
-Notice that section headings will toggle their content. Folder names under static files are also collapsible.
+Hay que tomar en cuenta que los títulos de las secciones se conmutan según el contenido. Los nombres de carpeta en archivos estáticos también son plegables.
 
 -------
 Each file listed in the section corresponds to a file physically located in the subfolder. Any operation performed on a file via the **admin** interface (create, edit, delete) can be performed directly from the shell using your favorite editor.
