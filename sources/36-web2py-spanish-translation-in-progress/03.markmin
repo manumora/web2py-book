@@ -198,15 +198,15 @@ Para fines de depuración siempre se puede añadir
 {{=response.toolbar()}}
 ``:code
 
-to the code in a view and it will show you some useful information, including the request, response and session objects, and list all db queries with their timing.
+para el código en una vista y se le mostrará alguna información útil, incluyendo los objetos request, response y session, y la lista de todas las consultas db (base de datos) con su tiempo.
 
-### Let's count
+### Contemos
 ``session``:inxx
-Let's now add a counter to this page that will count how many times the same visitor displays the page.
+Ahora vamos a agregar un contador a esta página que contará cuántas veces el mismo visitante vé la página.
 
-web2py automatically and transparently tracks visitors using sessions and cookies. For each new visitor, it creates a session and assigns a unique "session_id". The session is a container for variables that are stored server-side. The unique id is sent to the browser via a cookie. When the visitor requests another page from the same application, the browser sends the cookie back, it is retrieved by web2py, and the corresponding session is restored.
+Web2py de forma automática y transparente hace seguimiento de los visitantes usando sesiones y cookies. Por cada nuevo visitante, se crea una sesión y le asigna una única "session_id". La sesión es un contenedor para las variables que se almacenan en el servidor. El identificador único se envía al navegador a través de una cookie. Cuando el visitante solicita otra página desde la misma aplicación, el navegador envía la cookie, se recuperará por web2py, y el correspondiente período de sesiones se restaura.
 
-To use the session, modify the default controller:
+Para utilizar el período de sesiones, se modifica el controlador por defecto:
 ``
 def index():
     if not session.counter:
@@ -216,16 +216,16 @@ def index():
     return dict(message="Hello from MyApp", counter=session.counter)
 ``:code
 
-Notice that ``counter`` is not a web2py keyword but ``session`` is. We are asking web2py to check whether there is a counter variable in the session and, if not, to create one and set it to 1. If the counter is there, we ask web2py to increase the counter by 1. Finally we pass the value of the counter to the view.
+Observe que ``counter`` no es una palabra clave de web2py, pero ``session`` lo es. Le estamos pidiendo a web2py comprobar si existe una variable de contador en la sesión y, si no, que cree una y le asigne 1. Si el contador está ahí, le pedimos a web2py aumentar el contador en 1. Finalmente pasamos el valor del contador a la vista.
 
-A more compact way to code the same function is this:
+Una forma más compacta de codificar la misma función es la siguiente:
 ``
 def index():
     session.counter = (session.counter or 0) + 1
     return dict(message="Hello from MyApp", counter=session.counter)
 ``:code
 
-Now modify the view to add a line that displays the value of the counter:
+Ahora modifque la vista para añadir una línea que muestre el valor del contador:
 ``
 <html>
    <head></head>
@@ -236,20 +236,20 @@ Now modify the view to add a line that displays the value of the counter:
 </html>
 ``:code
 
-When you visit the index page again (and again) you should get the following HTML page:
+Cuando se visita la página index otra vez (y otra) se debe tener la siguiente página HTML:
 
 [[image @///image/en1300.png center 480px]]
 
-The counter is associated with each visitor, and is incremented each time the visitor reloads the page. Different visitors see different counters.
+El contador se asocia con cada visitante, y se incrementa cada vez que el visitante recarga la página. Diferentes visitantes ven diferentes contadores.
 
-### Say my name
+### Di mi nombre
 ``form``:inxx ``request.vars``:inxx
 
-Now create two pages (first and second), where the first page creates a form, asks the visitor's name, and redirects to the second page, which greets the visitor by name.
+Ahora se crean dos páginas (first y second) donde la primera crea un formulario, pregunta el nombre de quién la visita, y redirecciona a la segunda página, la cual saluda el visitante por su nombre.
 
 [[yUML diagram @///image/en1400.png center 293px]]
 
-Write the corresponding actions in the default controller:
+Se escriben las acciones correspondientes en el controlador por defecto:
 ``
 def first():
     return dict()
@@ -258,8 +258,8 @@ def second():
     return dict()
 ``:code
 
-Then create a view "default/first.html" for the first action,
-and enter:
+Entonces se crea una vista "default/first.html" para la primera acción
+y se inserta:
 ``
 {{extend 'layout.html'}}
 What is your name?
@@ -269,33 +269,33 @@ What is your name?
 </form>
 ``:code
 
-Finally, create a view "default/second.html" for the second action:
+Finalmente se crea una vista "default/second.html" para la segunda acción:
 ``
 {{extend 'layout.html'}}
 <h1>Hello {{=request.vars.visitor_name}}</h1>
 ``:code
 
 ``layout``:inxx
-In both views we have extended the basic "layout.html" view that comes with web2py. The layout view keeps the look and feel of the two pages coherent. The layout file can be edited and replaced easily, since it mainly contains HTML code.
+En ambas vistas, hemos ampliado la la vista básica "layout.html" que viene con web2py. La vista de diseño mantiene el aspecto de las dos páginas coherentemente. El archivo de diseño se puede editar y volver a montarse fácilmente, ya que principalmente contiene código HTML.
 
-If you now visit the first page, type your name:
+Si ahora se visita la primera página, al escribir su nombre:
 
 [[image @///image/en1500.png center 480px]]
 
-and submit the form, you will receive a greeting:
+y enviar el formulario, se recibirá el saludo:
 
 [[image @///image/en1600.png center 480px]]
 
-### Postbacks
+### Postbacks (restitución de datos)
 ``redirect``:inxx ``URL``:inxx ``postback``:inxx
 
-The mechanism for form submission that we used before is very common, but it is not good programming practice. All input should be validated and, in the above example, the burden of validation would fall on the second action. Thus the action that performs the validation is different from the action that generated the form. This tends to cause redundancy in the code.
+El mecanismo para el envío de formularios que utilizamos antes es muy común, pero no es una buena práctica de programación. Todas las entradas deben ser validadas y, en el ejemplo anterior, la carga de validación caería en la segunda acción. Así, la acción que realiza la validación es diferente de la acción que generó el formulario. Esto tiende a provocar redundancia en el código.
 
-A better pattern for form submission is to submit forms to the same action that generated them, in our example the "first". The "first" action should receive the variables, process them, store them server-side, and redirect the visitor to the "second" page, which retrieves the variables. This mechanism is called a ''postback''.
+Un mejor modelo para el envío de formularios es enviar los formularios a la misma acción que los genera, en nuestro ejemplo, la "first". La acción "first" debe recibir las variables, procesarlas, almacenarlas en el servidor, y redirigir al visitante a la "segunda" página, que recupera las variables. Este mecanismo se llama restitución de datos - ''postback''.
 
 [[yUML diagram @///image/en1700.png center 293px]]
 
-Modify the default controller to implement self-submission:
+Se modifica el controlador por defecto para implementar la auto-presentación:
 ``
 def first():
     if request.vars.visitor_name:
@@ -307,7 +307,7 @@ def second():
     return dict()
 ``:code
 
-Then modify the "default/first.html" view:
+Luego se modifica la vista "default/first.html":
 ``
 {{extend 'layout.html'}}
 What is your name?
@@ -317,7 +317,7 @@ What is your name?
 </form>
 ``:code
 
-and the "default/second.html" view needs to retrieve the data from the ``session`` instead of from the ``request.vars``:
+y la vista "default/second.html" necesita recuperar los datos de la ``session`` en lugar que desde ``request.vars``:
 ``
 {{extend 'layout.html'}}
 <h1>Hello {{=session.visitor_name or "anonymous"}}</h1>
