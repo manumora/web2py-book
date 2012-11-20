@@ -123,39 +123,39 @@ Todo está cuidadosamente organizado basado en el patrón de diseño Modelo-Vist
 Hay que tomar en cuenta que los títulos de las secciones se conmutan según el contenido. Los nombres de carpeta en archivos estáticos también son plegables.
 
 -------
-Each file listed in the section corresponds to a file physically located in the subfolder. Any operation performed on a file via the **admin** interface (create, edit, delete) can be performed directly from the shell using your favorite editor.
+Cada archivo enumerado en la sección corresponde a un archivo ubicado físicamente en la subcarpeta. Cualquier operación que se realiza en un archivo a través de la interfaz de **admin** (crear, editar, eliminar) se puede realizar directamente desde el intérprete de comandos usando cualquier editor.
 -------
 
-The application contains other types of files (database, session files, error files, etc.), but they are not listed on the ''edit'' page because they are not created or modified by the administrator; they are created and modified by the application itself.
+La aplicación contiene otros tipos de archivos (base de datos, archivos de sesión, los archivos de error, etc), pero que no figuran en la página ''edit'', porque no son creados o modificados por el administrador, sino que son creados y modificados por la propia aplicación.
 
-The controllers contain the logic and workflow of the application. Every URL gets mapped into a call to one of the functions in the controllers (actions). There are two default controllers: "appadmin.py" and "default.py". **appadmin** provides the database administrative interface; we do not need it now. "default.py" is the controller that you need to edit, the one that is called by default when no controller is specified in the URL. Edit the "index" function as follows:
+Los controladores contienen la lógica y el flujo de trabajo de la aplicación. Cada dirección URL se designa en una llamada a una de las funciones de los controladores (acciones). Hay dos controladores por defecto: "appadmin.py" y "default.py". **appadmin** proporciona un interfaz con la administración de la base de datos, no lo necesitamos en este momento. "default.py" es el controlador necesario para editar, el que se llama por defecto cuando no se especifica ningún controlador en la URL. Editar el "index" funciona de la siguiente manera:
 ``
 def index():
     return "Hello from MyApp"
 ``:code
 
-Here is what the online editor looks like:
+Aqui se observa como se ve en el editor en línea:
 
 [[image @///image/en1000.png center 480px]]
 
-Save it and go back to the ''edit'' page. Click on the index link to visit the newly created page.
+Salvémoslo y regresemos a la página ''edit''. Haz clic en el enlace del índice para visitar la página que ha sido creada.
 
-When you visit the URL
+Cuando se visita la URL
 ``
 http://127.0.0.1:8000/myapp/default/index
 ``:code
 
-the index action in the default controller of the myapp application is called. It returns a string that the browser displays for us. It should look like this:
+la acción del index en el controlador por defecto de myappl es llamada. Este retorna una cadena que el brownser despliega para que se vea. Debe lucir así:
 
 [[image @///image/en1100.png center 480px]]
 
-Now, edit the "index" function as follows:
+Ahora, se edita la función "index" tal como sigue:
 ``
 def index():
     return dict(message="Hello from MyApp")
 ``:code
 
-Also from the ''edit'' page, edit the view "default/index.html" (the view file associated with the action) and completely replace the existing contents of that file with the following:
+También, desde la página ''edit'', se edita la vista "default/index" (el nuevo archivo asociado con la acción), y en este archivo, reemplace el contenido existente por lo siguiente:
 ``
 <html>
    <head></head>
@@ -165,34 +165,34 @@ Also from the ''edit'' page, edit the view "default/index.html" (the view file a
 </html>
 ``:code
 
-Now the action returns a dictionary defining a ``message``. When an action returns a dictionary, web2py looks for a view with the name
+Ahora la función retorna un diccionario definiendo un mensaje ``message``. Cuando una acción retorna un diccionario, web2py busca una vista con el nombre
 
 ``[controller]/[function].[extension]``:code
 
- and executes it. Here [extension] is the requested extension. If no extension is specified, it defaults to "html", and that is what we will assume here. Under this assumption, the view is an HTML file that embeds Python code using special {{ }} tags. In particular, in the example, the ``{{=message}}`` instructs web2py to replace the tagged code with the value of the ``message`` returned by the action. Notice that ``message`` here is not a web2py keyword but is defined in the action. So far we have not used any web2py keywords.
+y lo ejecuta. Aquí [extension] es la extensión solicitada. Si no se especifica la extensión, el valor predeterminado es "html", y eso es lo que vamos a asumir aquí. Bajo este supuesto, la vista es un archivo HTML que se incluye en el código Python usando etiquetas especiales {{}}. En particular, en el ejemplo, el ``{{=message}}`` instruye web2py para reemplazar el código marcado con el valor de ``message`` devuelto por la acción. Nótese que aquí ``message`` no es una palabra clave de web2py sino que se define en la acción. Hasta ahora no hemos utilizado ninguna palabra clave web2py.
 
-If web2py does not find the requested view, it uses the "generic.html" view that comes with every application.
+Si web2py no encuentra la vista solicitada, utiliza la vista "generic.html" que viene con cada aplicación.
 
 -------
 ``Mac Mail``:inxx ``Google Maps``:inxx ``jsonp``:inxx
-If an extension other than "html" is specified ("json" for example), and the view file "[controller]/[function].json" is not found, web2py looks for the view "generic.json". web2py comes with generic.html, generic.json, generic.jsonp, generic.xml, generic.rss, generic.ics (for Mac Mail Calendar), generic.map (for embedding Google Mpas), and generic.pdf (based on fpdf). These generic views can be modified for each application individually, and additional views can be added easily.
+Si otra extensión distinta que "html" se especifica ("json", por ejemplo), y el archivo vista de "[controlador]/[función].json" no se encuentra, web2py busca la vista "generic.json". web2py viene con generic.html, generic.json, generic.xml, generic.rss, generic.ics (para el correo y calendario de Mac), generic.map (para Mapas de Google embebidos), y generic.pdf (basado en fpdf). Estas vistas genéricas puede ser modificadas para cada aplicación individual, y se pueden agregar fácilmente vistas adicionales .
 -------
 
 -------
-Generic views are a development tool. In production every action should have its own view. In fact, by default, generic views are only enabled from localhost.
+Las vistas genéricas son herramientas de desarrollo. En producción todas las acciones deben tener una vista propia. De hecho, por defecto, las vistas genéricas únicamente están habilitadas para localhost.
 -------
 
 -------
-You can also specify a view with ``response.view = 'default/something.html'``
+También puedes especificar una vista con ``response.view = 'default/something.html'``
 -------
 
-Read more on this topic in Chapter 10.
+Lea más sobre este tema en el capítulo 10.
 
-If you go back to "EDIT" and click on index, you will now see the following HTML page:
+Si se vuelve a "EDIT" y hace clic en el index, ahora veremos la siguiente página HTML:
 
 [[image @///image/en1200.png center 480px]]
 
-For debugging purposes you can always append
+Para fines de depuración siempre se puede añadir
 
 ``
 {{=response.toolbar()}}
